@@ -62,13 +62,13 @@ try:
     else:
       raise BaseException("Недопустимое выражение")
     
-  if num == '':
+  if num == '' or currentNode == None:
     raise BaseException("Недопустимое выражение")
   else:
     root = currentNode
     while not root.is_root:
       root = root.parent
     Node(num, parent=currentNode)
-    print(calcTreeExp(root))
+    print(f'Ответ {calcTreeExp(root)}')
 except BaseException as e:
   print(e)
