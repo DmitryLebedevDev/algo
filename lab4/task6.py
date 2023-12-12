@@ -14,7 +14,7 @@ currentNode = None
 num = ''
 try:
   charsWithPriority = []
-  basePriority = max(*priorities.values())
+  bracketsPriority = max(*priorities.values())
   opens = 0
   for i in range(len(msg)):
     char = msg[i]
@@ -26,9 +26,12 @@ try:
         raise BaseException("Недопустимое выражение")
       opens -= 1
     elif char in priorities:
+      currentPriority = priorities[char]+opens
+      if opens > 0:
+        currentPriority += bracketsPriority
       charsWithPriority.append((
         char,
-        basePriority+priorities[char]+opens
+        currentPriority
       ))
     else:
       charsWithPriority.append((char, 0))
@@ -69,6 +72,7 @@ try:
     while not root.is_root:
       root = root.parent
     Node(num, parent=currentNode)
-    print(f'Ответ {calcTreeExp(root)}')
+    print(RenderTree(root).by_attr())
+    print(f'Ответ: {msg}={calcTreeExp(root)}')
 except BaseException as e:
   print(e)

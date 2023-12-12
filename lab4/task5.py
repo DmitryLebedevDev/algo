@@ -47,6 +47,7 @@ try:
     while not root.is_root:
       root = root.parent
     Node(num, parent=currentNode)
-    print(f'Ответ {calcTreeExp(root)}')
+    print(RenderTree(root).by_attr())
+    print(f'Ответ: {msg}={calcTreeExp(root)}')
 except BaseException as e:
   print(e)
